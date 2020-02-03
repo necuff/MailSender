@@ -18,11 +18,16 @@ namespace MailSenderWpf
     /// </summary>
     public partial class SenderEditor : Window
     {
+        public string NameValue { get => NameEditor.Text; set => NameEditor.Text = value; }
+
+        public string AddressValue { get => AddressEditor.Text; set => AddressEditor.Text = value; }
+
         public SenderEditor(Sender Sender)
         {
             InitializeComponent();
 
-            DataContext = Sender;
+            NameValue = Sender.Name;
+            AddressValue = Sender.Address;
         }
 
         private void OnOkButtonClick(object sender, RoutedEventArgs e)

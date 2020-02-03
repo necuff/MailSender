@@ -48,8 +48,9 @@ namespace MailSenderWpf
             var dialog = new SenderEditor(sender);
 
             if (dialog.ShowDialog() != true) return;
-            
 
+            sender.Name = dialog.NameValue;
+            sender.Address = dialog.AddressValue;
         }        
     }
 }
