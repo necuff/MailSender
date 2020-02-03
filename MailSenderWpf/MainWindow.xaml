@@ -36,7 +36,7 @@
                                       ItemsSource="{x:Static data:TestData.Senders}" 
                                       DisplayMemberPath="Address"
                                       SelectedIndex="0"/>
-                            <Button ToolTip="Добавить">
+                            <Button ToolTip="Добавить" Click="OnSenderEditClick">
                                 <fc:ImageAwesome Height="12" Icon="Solid_Plus" Foreground="LawnGreen"></fc:ImageAwesome>
                             </Button>
                             <Button ToolTip="Редактировать">

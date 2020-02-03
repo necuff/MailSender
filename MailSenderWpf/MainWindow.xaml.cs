@@ -39,5 +39,17 @@ namespace MailSenderWpf
 
             mail_sender.Send(tbMailHeader.Text, tbMailBody.Text, sender.Address, recipient.Address);
         }     
+
+        private void OnSenderEditClick(object Sender, RoutedEventArgs e)
+        {
+            var sender = cbSenderList.SelectedItem as Sender;
+            if (sender is null) return;
+
+            var dialog = new SenderEditor(sender);
+
+            if (dialog.ShowDialog() != true) return;
+            
+
+        }        
     }
 }
