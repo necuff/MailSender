@@ -47,7 +47,7 @@
                             </Button>
                         </ToolBar>
                         <ToolBar Header="Сервера" Band="1" BandIndex="0">
-                            <ComboBox Width="150" 
+                            <ComboBox Width="150" Name="cbServersList"
                                       ItemsSource="{x:Static data:TestData.Servers}"
                                       SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
@@ -96,11 +96,17 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Получатели писем">
-                        <DataGrid>
+                        <DataGrid Name="dgRecipientsList"
+                                  ItemsSource="{x:Static data:TestData.Recipients}" 
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  VerticalGridLinesBrush="Gray"
+                                  GridLinesVisibility="Vertical"
+                                  AlternatingRowBackground="LightGray">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="id"/>
-                                <DataGridTextColumn Header="Имя" Width="*"/>
-                                <DataGridTextColumn Header="Адрес"/>
+                                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
@@ -119,7 +125,7 @@
                                         <TextBlock HorizontalAlignment="Center" Text="Запланировать"/>
                                     </DockPanel>
                                 </Button>
-                                <Button HorizontalContentAlignment="Stretch">
+                                <Button HorizontalContentAlignment="Stretch" Click="OnSendButtonClick">
                                     <DockPanel Margin="20,0">
                                         <fc:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="Solid_Share"/>
                                         <TextBlock HorizontalAlignment="Center" Text="Отправить"/>
@@ -187,10 +193,10 @@
                     <GroupBox Header="Выбранное письмо" Grid.Column="1">
                         <DockPanel>
                             <GroupBox DockPanel.Dock="Top" Header="Тема письма">
-                                <TextBox Text="Текст заголовка письма"/>
+                                <TextBox Text="Текст заголовка письма" Name="tbMailHeader"/>
                             </GroupBox>
                             <GroupBox Header="Текст письма">
-                                <TextBox TextWrapping="Wrap" AcceptsReturn="True">Текст тела письма</TextBox>
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Name="tbMailBody">Текст тела письма</TextBox>
                             </GroupBox>
                         </DockPanel>
                     </GroupBox>

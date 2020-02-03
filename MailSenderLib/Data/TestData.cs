@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MailSenderLib.Entities;
+using MailSenderLib.Service;
 
 namespace MailSenderLib.Data
 {
@@ -9,9 +10,9 @@ namespace MailSenderLib.Data
     {
         public static List<Server> Servers { get; } = new List<Server>
         {
-            new Server { Name = "Яндекс", Address = "smtp.yandex.ru", Port = 587, Login = "UserLogin", Password = "Password"},
-            new Server { Name = "Mail.ru", Address = "smtp.mail.ru", Port = 587, Login = "UserLogin", Password = "Password"},
-            new Server { Name = "Gmail", Address = "smtp.gmail.com", Port = 587, Login = "UserLogin", Password = "Password"}
+            new Server { Name = "Яндекс", Address = "smtp.yandex.ru", Port = 587, Login = "UserLogin", Password = "Password".Encode(3)},
+            new Server { Name = "Mail.ru", Address = "smtp.mail.ru", Port = 587, Login = "UserLogin", Password = "Password".Encode(3)},
+            new Server { Name = "Gmail", Address = "smtp.gmail.com", Port = 587, Login = "UserLogin", Password = "Password".Encode(3)}
         };
 
         public static List<Sender> Senders { get; } = new List<Sender>
@@ -19,6 +20,13 @@ namespace MailSenderLib.Data
             new Sender{Name = "Иванов", Address = "ivanov@server.ru" },
             new Sender{Name = "Петров", Address = "petrov@server.ru" },
             new Sender{Name = "Сидоров", Address = "sidorov@server.ru" }
+        };
+
+        public static List<Recipient> Recipients { get; } = new List<Recipient>
+        {
+            new Recipient{Name = "Иванов", Address = "ivanov@server.ru" },
+            new Recipient{Name = "Петров", Address = "petrov@server.ru" },
+            new Recipient{Name = "Сидоров", Address = "sidorov@server.ru" }
         };
     }
 }
