@@ -6,7 +6,8 @@
         xmlns:fc="http://schemas.fontawesome.com/icons/"
         xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"        
         mc:Ignorable="d"
-        Title="Главное окно" Height="600" Width="800">
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Title="{Binding Title}" Height="600" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
