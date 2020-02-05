@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"             
              xmlns:local="clr-namespace:MailSenderWpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
@@ -21,9 +22,9 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Name:"/>
         <TextBlock Grid.Column="0" Grid.Row="2" Text="Address:"/>
 
-        <TextBox Grid.Column="1" Grid.Row="0" />
-        <TextBox Grid.Column="1" Grid.Row="1" />
-        <TextBox Grid.Column="1" Grid.Row="2" />
+        <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding SelectedRecipient.Id}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedRecipient.Name}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedRecipient.Address}"/>
 
         <UniformGrid Rows="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" 
                      VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10">

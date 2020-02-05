@@ -10,6 +10,7 @@ namespace MailSenderWpf.ViewModels
         private string _Title = "Рассыльщик почты";
         private readonly RecipientsManager _RecipientsManager;
         private ObservableCollection<Recipient> _Recipients;
+        private Recipient _SelectedRecipient;
 
         public MainWindowViewModel(RecipientsManager RecipientsManager)
         {
@@ -29,6 +30,10 @@ namespace MailSenderWpf.ViewModels
             private set => Set(ref _Recipients, value);
         }
 
-        
+        public Recipient SelectedRecipient
+        {
+            get => _SelectedRecipient;
+            set => Set(ref _SelectedRecipient, value);
+        }
     }
 }
