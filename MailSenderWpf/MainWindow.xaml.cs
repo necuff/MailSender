@@ -29,6 +29,7 @@ namespace MailSenderWpf
 
         private void OnSendButtonClick(object Sender, RoutedEventArgs e)
         {
+            /*
             var recipient = dgRecipientsList.SelectedItem as Recipient;
             var sender = cbSenderList.SelectedItem as Sender;
             var server = cbServersList.SelectedItem as Server;
@@ -38,6 +39,7 @@ namespace MailSenderWpf
             var mail_sender = new MailSenderLib.Services.MailSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password.Decode(3));
 
             mail_sender.Send(tbMailHeader.Text, tbMailBody.Text, sender.Address, recipient.Address);
+            */
         }     
 
         private void OnSenderEditClick(object Sender, RoutedEventArgs e)

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\MailSenderLib\MailSenderLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

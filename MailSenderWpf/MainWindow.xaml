@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fc="http://schemas.fontawesome.com/icons/"
-        xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"        
+        xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"      
+        xmlns:view="clr-namespace:MailSenderWpf.Views"
         mc:Ignorable="d"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" Height="600" Width="800">
@@ -97,19 +98,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Получатели писем">
-                        <DataGrid Name="dgRecipientsList"
-                                  ItemsSource="{Binding Recipients}" 
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True"
-                                  VerticalGridLinesBrush="Gray"
-                                  GridLinesVisibility="Vertical"
-                                  AlternatingRowBackground="LightGray">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="id"/>
-                                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <view:RecipientsView/>
                     </GroupBox>
                 </Grid>
             </TabItem>
