@@ -4,7 +4,205 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fc="http://schemas.fontawesome.com/icons/"
+        xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"        
         mc:Ignorable="d"
         Title="Главное окно" Height="600" Width="800">
-    <Grid/>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Создать" />
+                <MenuItem Header="Открыть" />
+                <MenuItem Header="Закрыть" />
+                <MenuItem Header="Сохранить" />
+                <Separator />
+                <MenuItem Header="Выход" />
+            </MenuItem>
+            <MenuItem Header="Сервис" />
+            <MenuItem Header="Помощь" />
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="Готов" />
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Рассылка" ToolTip="Управление рассылкой">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <ToolBarTray>
+                        <ToolBar Header="Отправители">
+                            <ComboBox Width="150" Name="cbSenderList"
+                                      ItemsSource="{x:Static data:TestData.Senders}" 
+                                      DisplayMemberPath="Address"
+                                      SelectedIndex="0"/>
+                            <Button ToolTip="Добавить" Click="OnSenderEditClick">
+                                <fc:ImageAwesome Height="12" Icon="Solid_Plus" Foreground="LawnGreen"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <fc:ImageAwesome Height="12" Icon="Regular_Edit" Foreground="Orange"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <fc:ImageAwesome Height="12" Icon="Regular_TrashAlt" Foreground="Red"></fc:ImageAwesome>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Header="Сервера" Band="1" BandIndex="0">
+                            <ComboBox Width="150" Name="cbServersList"
+                                      ItemsSource="{x:Static data:TestData.Servers}"
+                                      SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="entities:Server">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Address}" Opacity="0.6">
+                                                <TextBlock.ToolTip>
+                                                    <TextBlock Text="{Binding Port, StringFormat=Port:{0}}"/>
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+                                            <TextBlock>:</TextBlock> 
+                                            <TextBlock Text="{Binding Port}" Opacity="0.6"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button ToolTip="Добавить">
+                                <fc:ImageAwesome Height="12" Icon="Solid_Plus" Foreground="LawnGreen"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <fc:ImageAwesome Height="12" Icon="Regular_Edit" Foreground="Orange"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <fc:ImageAwesome Height="12" Icon="Regular_TrashAlt" Foreground="Red"></fc:ImageAwesome>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Header="Получатели" Band="1">
+                            <Button ToolTip="Добавить">
+                                <fc:ImageAwesome Height="12" Icon="Solid_Plus" Foreground="LawnGreen"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <fc:ImageAwesome Height="12" Icon="Regular_Edit" Foreground="Orange"></fc:ImageAwesome>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <fc:ImageAwesome Height="12" Icon="Regular_TrashAlt" Foreground="Red"></fc:ImageAwesome>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar>
+                            <Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Перейти в планировщик"></TextBlock>
+                                    <fc:ImageAwesome Height="12" Icon="Regular_Clock" Margin="3,0,0,0" Foreground="Blue"></fc:ImageAwesome>
+                                </StackPanel>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <GroupBox Grid.Row="1" Header="Получатели писем">
+                        <DataGrid Name="dgRecipientsList"
+                                  ItemsSource="{x:Static data:TestData.Recipients}" 
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  VerticalGridLinesBrush="Gray"
+                                  GridLinesVisibility="Vertical"
+                                  AlternatingRowBackground="LightGray">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="id"/>
+                                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Планировщик">
+                <DockPanel>
+                    <GroupBox Header="Управление" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock Text="Календарь" />
+                            <Calendar/>
+                            <StackPanel Margin="5">
+                                <Button HorizontalContentAlignment="Stretch">
+                                    <DockPanel Margin="20,0">
+                                        <fc:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="Regular_Clock"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="Запланировать"/>
+                                    </DockPanel>
+                                </Button>
+                                <Button HorizontalContentAlignment="Stretch" Click="OnSendButtonClick">
+                                    <DockPanel Margin="20,0">
+                                        <fc:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="Solid_Share"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="Отправить"/>
+                                    </DockPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Задания">
+                        <ListBox>
+                            <ListBoxItem HorizontalContentAlignment="Stretch">
+                                <GroupBox Header="Задание 1">
+                                    <StackPanel>
+                                        <TextBlock Text="Время"/>
+                                        <TextBlock Text="Сервер"/>
+                                        <TextBlock Text="Отправитель"/>
+                                        <TextBlock Text="Список получателей"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalContentAlignment="Stretch">
+                                <GroupBox Header="Задание 2">
+                                    <StackPanel>
+                                        <TextBlock Text="Время"/>
+                                        <TextBlock Text="Сервер"/>
+                                        <TextBlock Text="Отправитель"/>
+                                        <TextBlock Text="Список получателей"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                            <ListBoxItem HorizontalContentAlignment="Stretch">
+                                <GroupBox Header="Задание 3">
+                                    <StackPanel>
+                                        <TextBlock Text="Время"/>
+                                        <TextBlock Text="Сервер"/>
+                                        <TextBlock Text="Отправитель"/>
+                                        <TextBlock Text="Список получателей"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </ListBoxItem>
+                        </ListBox>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Письма" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="150" MaxWidth="300" Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Список писем">
+                        <DockPanel>
+                            <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                                <Button Content="Add"/>
+                                <Button Content="Del"/>
+                            </UniformGrid>
+                            <ListBox>
+                                <ListBoxItem>Письмо 1</ListBoxItem>
+                                <ListBoxItem>Письмо 2</ListBoxItem>
+                                <ListBoxItem>Письмо 3</ListBoxItem>
+                                <ListBoxItem>Письмо 4</ListBoxItem>
+                            </ListBox>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Выбранное письмо" Grid.Column="1">
+                        <DockPanel>
+                            <GroupBox DockPanel.Dock="Top" Header="Тема письма">
+                                <TextBox Text="Текст заголовка письма" Name="tbMailHeader"/>
+                            </GroupBox>
+                            <GroupBox Header="Текст письма">
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Name="tbMailBody">Текст тела письма</TextBox>
+                            </GroupBox>
+                        </DockPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Статистика" />
+        </TabControl>
+    </DockPanel>
 </Window>

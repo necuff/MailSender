@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MailSenderLib.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MailSenderLib.Service;
 
 namespace MailSenderWpf
 {
@@ -24,5 +26,31 @@ namespace MailSenderWpf
         {
             InitializeComponent();
         }
+
+        private void OnSendButtonClick(object Sender, RoutedEventArgs e)
+        {
+            var recipient = dgRecipientsList.SelectedItem as Recipient;
+            var sender = cbSenderList.SelectedItem as Sender;
+            var server = cbServersList.SelectedItem as Server;
+
+            if (recipient is null || sender is null || server is null) return;
+
+            var mail_sender = new MailSenderLib.Services.MailSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password.Decode(3));
+
+            mail_sender.Send(tbMailHeader.Text, tbMailBody.Text, sender.Address, recipient.Address);
+        }     
+
+        private void OnSenderEditClick(object Sender, RoutedEventArgs e)
+        {
+            var sender = cbSenderList.SelectedItem as Sender;
+            if (sender is null) return;
+
+            var dialog = new SenderEditor(sender);
+
+            if (dialog.ShowDialog() != true) return;
+
+            sender.Name = dialog.NameValue;
+            sender.Address = dialog.AddressValue;
+        }        
     }
 }

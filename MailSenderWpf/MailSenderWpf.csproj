@@ -10,4 +10,8 @@
     <PackageReference Include="FontAwesome5" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MailSenderLib\MailSenderLib.csproj" />
+  </ItemGroup>
+
 </Project>
