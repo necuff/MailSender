@@ -98,7 +98,7 @@
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Получатели писем">
                         <DataGrid Name="dgRecipientsList"
-                                  ItemsSource="{x:Static data:TestData.Recipients}" 
+                                  ItemsSource="{Binding Recipients}" 
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   VerticalGridLinesBrush="Gray"

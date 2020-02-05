@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using MailSenderLib.Entities;
+using MailSenderLib.Services;
 
 namespace MailSenderWpf.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private string _Title = "Рассыльщик почты";
+        private readonly RecipientsManager _RecipientsManager;
 
         public string Title
         {
@@ -15,9 +16,18 @@ namespace MailSenderWpf.ViewModels
             set => Set(ref _Title, value);
         }
 
-        public MainWindowViewModel()
-        {
+        private ObservableCollection<Recipient> _Recipients;
 
+        public ObservableCollection<Recipient> Recipients 
+        {
+            get => _Recipients;
+            private set => Set(ref _Recipients, value);
+        }
+
+        public MainWindowViewModel(RecipientsManager RecipientsManager)
+        {
+            _RecipientsManager = RecipientsManager;
+            _Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
     }
 }
