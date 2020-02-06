@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using MailSenderLib.Entities;
 using MailSenderLib.Services;
 
@@ -14,8 +16,9 @@ namespace MailSenderWpf.ViewModels
 
         public MainWindowViewModel(RecipientsManager RecipientsManager)
         {
-            _RecipientsManager = RecipientsManager;
-            _Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
+            LoadrecipientsDataCommand = new RelayCommand(OnLoadrecipientsDataCommandExecuted, CanLoadRecipientsDataCommandExecute);
+            SaveRecipientChangedCommand = new RelayCommand<Recipient>(OnSaveRecipientChangedCommandExecuted, CanSaveRecipientChangedCommandExecute);
+            _RecipientsManager = RecipientsManager;            
         }
 
         public string Title
@@ -34,6 +37,22 @@ namespace MailSenderWpf.ViewModels
         {
             get => _SelectedRecipient;
             set => Set(ref _SelectedRecipient, value);
+        }
+
+        public ICommand LoadrecipientsDataCommand { get; }
+        public ICommand SaveRecipientChangedCommand { get; }
+
+        private bool CanLoadRecipientsDataCommandExecute() => true;
+        private void OnLoadrecipientsDataCommandExecuted()
+        {
+            Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
+        }
+
+        private bool CanSaveRecipientChangedCommandExecute(Recipient recipient) => recipient != null;
+        private void OnSaveRecipientChangedCommandExecuted(Recipient recipient)
+        {
+            _RecipientsManager.Edit(recipient);
+            _RecipientsManager.SaveChanges();
         }
     }
 }

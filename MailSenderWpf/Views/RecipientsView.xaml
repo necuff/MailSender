@@ -13,7 +13,7 @@
             <TextBlock>Фильтр</TextBlock>
             <TextBox></TextBox>
         </DockPanel>
-        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="40,5" Margin="0,5,0,10">Обновить</Button>
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="40,5" Margin="0,5,0,10" Command="{Binding LoadrecipientsDataCommand}">Обновить</Button>
         <DataGrid 
             ItemsSource="{Binding Recipients}"     
             SelectedItem="{Binding SelectedRecipient}"
