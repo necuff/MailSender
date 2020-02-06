@@ -11,6 +11,6 @@ namespace MailSenderLib.Services.Interfaces
 
         void Edit(Recipient Recipient);
 
-        void SaveChanges()
+        void SaveChanges();
     }    
 }

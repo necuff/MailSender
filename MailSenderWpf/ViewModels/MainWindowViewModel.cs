@@ -4,19 +4,20 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MailSenderLib.Entities;
 using MailSenderLib.Services;
+using MailSenderLib.Services.Interfaces;
 
 namespace MailSenderWpf.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private string _Title = "Рассыльщик почты";
-        private readonly RecipientsManager _RecipientsManager;
+        private readonly IRecipientsManager _RecipientsManager;
         private ObservableCollection<Recipient> _Recipients;
         private Recipient _SelectedRecipient;
 
-        public MainWindowViewModel(RecipientsManager RecipientsManager)
+        public MainWindowViewModel(IRecipientsManager RecipientsManager)
         {
-            LoadrecipientsDataCommand = new RelayCommand(OnLoadrecipientsDataCommandExecuted, CanLoadRecipientsDataCommandExecute);
+            LoadRecipientsDataCommand = new RelayCommand(OnLoadrecipientsDataCommandExecuted, CanLoadRecipientsDataCommandExecute);
             SaveRecipientChangedCommand = new RelayCommand<Recipient>(OnSaveRecipientChangedCommandExecuted, CanSaveRecipientChangedCommandExecute);
             _RecipientsManager = RecipientsManager;            
         }
@@ -39,7 +40,7 @@ namespace MailSenderWpf.ViewModels
             set => Set(ref _SelectedRecipient, value);
         }
 
-        public ICommand LoadrecipientsDataCommand { get; }
+        public ICommand LoadRecipientsDataCommand { get; }
         public ICommand SaveRecipientChangedCommand { get; }
 
         private bool CanLoadRecipientsDataCommandExecute() => true;

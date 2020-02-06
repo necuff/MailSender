@@ -1,8 +1,9 @@
 ﻿using MailSenderLib.Data;
 using MailSenderLib.Entities;
+using MailSenderLib.Services.Interfaces;
 using System.Collections.Generic;
 
-namespace MailSenderLib.Services.Interfaces
+namespace MailSenderLib.Services
 {
     public class RecipientsStoreInMemory : IRecipientsStore
     {

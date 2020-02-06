@@ -1,14 +1,12 @@
 ﻿using MailSenderLib.Entities;
 using MailSenderLib.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MailSenderLib.Services
 {
     public class RecipientsManager : IRecipientsManager
     {
-        private RecipientsStoreInMemory _Store;
+        private IRecipientsStore _Store;
 
         public RecipientsManager(RecipientsStoreInMemory Store)
         {
