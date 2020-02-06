@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MailSenderLib.Services.Interfaces
 {
-    public class RecipientsStoreInMemory
+    public class RecipientsStoreInMemory : IRecipientsStore
     {
         public IEnumerable<Recipient> Get() => TestData.Recipients;
         

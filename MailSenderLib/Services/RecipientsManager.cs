@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MailSenderLib.Services
 {
-    public class RecipientsManager
+    public class RecipientsManager : IRecipientsManager
     {
         private RecipientsStoreInMemory _Store;
 

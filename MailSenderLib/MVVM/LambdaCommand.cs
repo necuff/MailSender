@@ -26,7 +26,6 @@ namespace MailSenderLib.MVVM
          * }         
          */
 
-
         public void Execute(object parameter) => _CommandAction(parameter);
     }
 }

@@ -48,7 +48,11 @@ namespace MailSenderWpf.ViewModels
             Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
 
-        private bool CanSaveRecipientChangedCommandExecute(Recipient recipient) => recipient != null;
+        private bool CanSaveRecipientChangedCommandExecute(Recipient recipient)
+        {
+            System.Diagnostics.Debug.WriteLine("Проверка состояния команды " + recipient?.Name);
+            return recipient != null;
+        }
         private void OnSaveRecipientChangedCommandExecuted(Recipient recipient)
         {
             _RecipientsManager.Edit(recipient);
