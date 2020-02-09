@@ -8,7 +8,7 @@ namespace MailSenderLib.Services
     {
         private IRecipientsStore _Store;
 
-        public RecipientsManager(RecipientsStoreInMemory Store)
+        public RecipientsManager(IRecipientsStore Store)
         {
             _Store = Store;
         }
@@ -35,7 +35,6 @@ namespace MailSenderLib.Services
         }
 
 
-        //Edit(Recipient)
         //Delete(Recipient)
     }
 }
