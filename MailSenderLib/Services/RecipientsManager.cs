@@ -16,7 +16,7 @@ namespace MailSenderLib.Services
 
         public IEnumerable<Recipient> GetAll()
         {
-            return _Store.Get();
+            return _Store.GetAll();
         }
 
         public void Add(Recipient NewRecipient)
