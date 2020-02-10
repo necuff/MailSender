@@ -6,8 +6,7 @@
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"             
              xmlns:local="clr-namespace:MailSenderWpf.Views"
              xmlns:validation="clr-namespace:MailSenderWpf.Infrastructure.ValidationRules"
-             mc:Ignorable="d" 
-             d:DesignHeight="159.368" d:DesignWidth="400">
+             mc:Ignorable="d" d:DesignWidth="400" Height="185">
     <Grid Margin="15" Validation.Error="OnDataValidationError">
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -36,7 +35,7 @@
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="HorizontalAlignment" Value="Right" />
             </Style>
-            
+
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
