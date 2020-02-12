@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MailSenderWpf.Views"
+             xmlns:entities="clr-namespace:MailSenderLib.Entities;assembly=MailSenderLib"
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,7 +14,7 @@
             <TextBlock>Фильтр</TextBlock>
             <TextBox></TextBox>
         </DockPanel>
-        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="40,5" Margin="0,5,0,10" Command="{Binding LoadrecipientsDataCommand}">Обновить</Button>
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="40,5" Margin="0,5,0,10" Content="Обновить" Command="{Binding LoadRecipientsDataCommand}" />
         <DataGrid 
             ItemsSource="{Binding Recipients}"     
             SelectedItem="{Binding SelectedRecipient}"

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace MailSenderLib.Entities
 {
-    public class Sender : PersonEntity
-    {       
-        public override string ToString() => $"{Name}:{Address}";
+    public class MailingList : NamedEntity
+    {
+        public ICollection<Recipient> Recipients { get; set; } = new List<Recipient>();
     }
 }

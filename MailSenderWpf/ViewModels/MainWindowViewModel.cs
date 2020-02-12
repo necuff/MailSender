@@ -40,15 +40,14 @@ namespace MailSenderWpf.ViewModels
             set => Set(ref _SelectedRecipient, value);
         }
 
-        public ICommand LoadRecipientsDataCommand { get; }
-        public ICommand SaveRecipientChangedCommand { get; }
-
+        public ICommand LoadRecipientsDataCommand { get; }        
         private bool CanLoadRecipientsDataCommandExecute() => true;
         private void OnLoadrecipientsDataCommandExecuted()
-        {
+        {           
             Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
 
+        public ICommand SaveRecipientChangedCommand { get; }
         private bool CanSaveRecipientChangedCommandExecute(Recipient recipient)
         {
             System.Diagnostics.Debug.WriteLine("Проверка состояния команды " + recipient?.Name);

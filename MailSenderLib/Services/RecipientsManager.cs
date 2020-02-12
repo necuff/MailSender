@@ -8,7 +8,7 @@ namespace MailSenderLib.Services
     {
         private IRecipientsStore _Store;
 
-        public RecipientsManager(RecipientsStoreInMemory Store)
+        public RecipientsManager(IRecipientsStore Store)
         {
             _Store = Store;
         }
@@ -16,7 +16,7 @@ namespace MailSenderLib.Services
 
         public IEnumerable<Recipient> GetAll()
         {
-            return _Store.Get();
+            return _Store.GetAll();
         }
 
         public void Add(Recipient NewRecipient)
@@ -35,7 +35,6 @@ namespace MailSenderLib.Services
         }
 
 
-        //Edit(Recipient)
         //Delete(Recipient)
     }
 }
