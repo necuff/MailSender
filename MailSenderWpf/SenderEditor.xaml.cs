@@ -22,7 +22,7 @@ namespace MailSenderWpf
 
         public string AddressValue { get => AddressEditor.Text; set => AddressEditor.Text = value; }
 
-        public SenderEditor(Sender Sender)
+        public SenderEditor(Sender Sender, MainWindow mainWindow)
         {
             InitializeComponent();
 
@@ -40,6 +40,11 @@ namespace MailSenderWpf
         {
             DialogResult = false;
             Close();
+        }
+
+        private void OnCloseMainWindowClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
