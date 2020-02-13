@@ -1,5 +1,7 @@
 ﻿using MailSenderLib.Entities;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace MailSenderLib.Services
 {
@@ -15,6 +17,18 @@ namespace MailSenderLib.Services
                 From.Address, To.Address,
                 _Server.Address, _Server.Port, _Server.UseSSL ? "SSL" : "no SSL",
                 Mail.Subject, Mail.Body);
+        }
+
+        public void Send(Mail Message, Sender From, IEnumerable<Recipient> To)
+        {
+            foreach (var recipient in To)
+                Send(Message, From, recipient);
+        }
+
+        public void SendParallel(Mail Message, Sender From, IEnumerable<Recipient> To)
+        {
+            foreach (var recipient in To)
+                ThreadPool.QueueUserWorkItem(_ => Send(Message, From, recipient));
         }
     }
 

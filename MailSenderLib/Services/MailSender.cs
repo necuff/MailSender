@@ -4,6 +4,7 @@ using System.Text;
 using System.Net.Mail;
 using System.Net;
 using MailSenderLib.Entities;
+using System.Threading;
 
 namespace MailSenderLib.Services
 {
@@ -25,6 +26,19 @@ namespace MailSenderLib.Services
                     client.Send(message);
             }
         }
+
+        public void Send(Mail Message, Sender From, IEnumerable<Recipient> To)
+        {
+            foreach (var recipient in To)
+                Send(Message, From, recipient);
+        }
+
+        public void SendParallel(Mail Message, Sender From, IEnumerable<Recipient> To)
+        {
+            foreach (var recipient in To)
+                ThreadPool.QueueUserWorkItem(_ => Send(Message, From, recipient));
+        }
+
     }
 
 }
