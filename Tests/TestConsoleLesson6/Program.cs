@@ -235,7 +235,7 @@ namespace TestConsoleLesson6
 
 
             //Task.Factory.StartNew() фабрика задач
-            await Task.Delay(1000) //Thread.Sleep(1000)
+            await Task.Delay(1000); //Thread.Sleep(1000)
 
         }
 
