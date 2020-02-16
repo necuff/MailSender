@@ -34,7 +34,7 @@ namespace TestConsoleLesson6
             //worker.RunWorkerAsync(); - запускает событие DoWork
             //worker.RunWorkerCompleted - при завершении операции
 
-            
+
 
 
             // Параллельное выполнение методов
@@ -63,7 +63,16 @@ namespace TestConsoleLesson6
             Console.WriteLine("Выполнилось {0} итераций", for_result.LowestBreakIteration);
             */
 
-            var messages = Enumerable.Range(1, 100).Select(i => $"Message {i:000}").ToArray();
+            //Параллельный foreach
+            var messages = Enumerable.Range(1, 100).Select(i => $"Message {i:000}");//.ToArray();
+            //Parallel.ForEach(messages, ParallelInvokeMethod);
+
+            var foreach_result = Parallel.ForEach(messages, (s, state) =>
+            {
+                if (s.EndsWith("20")) state.Break();
+                ParallelInvokeMethod(s);
+            });
+            Console.WriteLine("Выполнилось {0} итераций", foreach_result.LowestBreakIteration);
 
             Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
