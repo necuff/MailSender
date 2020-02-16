@@ -6,8 +6,6 @@ using System.Linq;
 
 namespace MailSenderLib.Services
 {
-
-
     public class RecipientsStoreInMemory : DataStoreInMemory<Recipient>, IRecipientsStore
     {            
         public RecipientsStoreInMemory() : base(TestData.Recipients)

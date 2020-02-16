@@ -46,8 +46,9 @@ namespace MailSenderWpf
         {
             var sender = cbSenderList.SelectedItem as Sender;
             if (sender is null) return;
-
-            var dialog = new SenderEditor(sender);
+            
+            var current_main_window = (MainWindow)Application.Current.MainWindow;
+            var dialog = new SenderEditor(sender, current_main_window);
 
             if (dialog.ShowDialog() != true) return;
 
