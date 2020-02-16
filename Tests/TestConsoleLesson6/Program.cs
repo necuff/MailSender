@@ -108,6 +108,7 @@ namespace TestConsoleLesson6
                 ToArray();
             */
 
+            Taskstest.Start();
 
             Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
@@ -128,4 +129,59 @@ namespace TestConsoleLesson6
             Console.WriteLine("ThrID: {0} - finished, {1}", Thread.CurrentThread.ManagedThreadId, msg);
         }
     }
+
+
+    internal static class Taskstest
+    {
+        public static void Start()
+        {
+            #region пример, как писать таски не стоит, но можно
+            /*
+             * Создание тасков
+            var first_thread = new Task(TaskMethod);
+            first_thread.Start();
+
+            new Task(TaskMethod).Start();
+            */
+            /*
+            const string msg = "ОЛололол! !!!";
+
+            var calc_task = new Task<int>(() => GetMessageLengthID(msg));
+            var continue_task = calc_task.ContinueWith(t => Console.WriteLine($"Длина сообщения {t.Result}"));
+            var next_task = continue_task.ContinueWith(t => Console.WriteLine("Это самая последняя таска"));
+            calc_task.Start();
+
+            for (int i = 0; i < 20; i++)
+            {
+                Thread.Sleep(30);
+                Console.WriteLine("Работа в основном потоке");
+            }
+            calc_task.Wait();
+                
+            */
+            //var msg_length = calc_task.Result;
+
+            //Console.WriteLine($"Длина сообщения {msg_length}");
+            #endregion
+
+
+        }
+
+        private static void TaskMethod()
+        {
+            Console.WriteLine("ThrID: {0} TaskID: {1} - started", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            Thread.Sleep(1000);
+            Console.WriteLine("ThrID: {0} TaskID: {1} - finished", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+        }
+
+        private static int GetMessageLengthID(string msg)
+        {
+            Console.WriteLine("ThrID: {0} TaskID: {1} - started : msg = {2} ", Thread.CurrentThread.ManagedThreadId, Task.CurrentId, msg );
+            Thread.Sleep(1000);
+            Console.WriteLine("ThrID: {0} TaskID: {1} - finished : msg = {2} ", Thread.CurrentThread.ManagedThreadId, Task.CurrentId, msg);
+            return msg.Length;
+        }
+    }
+
+
 }
