@@ -35,8 +35,6 @@ namespace TestConsoleLesson6
             //worker.RunWorkerCompleted - при завершении операции
 
 
-
-
             // Параллельное выполнение методов
             //Invoke держит основной поток до выполнения всех вызванных потоков            
             /*
@@ -49,6 +47,10 @@ namespace TestConsoleLesson6
             */
 
             //Parallel.Invoke(new ParallelOptions { MaxDegreeOfParallelism = 3}, Enumerable.Repeat(new Action(ParallelInvokeMethod), 100).ToArray());
+
+
+
+
 
             //параллельный цикл for
             //Parallel.For(0, 100, i => ParallelInvokeMethod($"Message {i}"));
@@ -63,16 +65,49 @@ namespace TestConsoleLesson6
             Console.WriteLine("Выполнилось {0} итераций", for_result.LowestBreakIteration);
             */
 
-            //Параллельный foreach
-            var messages = Enumerable.Range(1, 100).Select(i => $"Message {i:000}");//.ToArray();
-            //Parallel.ForEach(messages, ParallelInvokeMethod);
 
+
+
+            //Параллельный foreach
+            //var messages = Enumerable.Range(1, 100).Select(i => $"Message {i:000}");//.ToArray();
+            //Parallel.ForEach(messages, ParallelInvokeMethod);
+            /*
             var foreach_result = Parallel.ForEach(messages, (s, state) =>
             {
                 if (s.EndsWith("20")) state.Break();
                 ParallelInvokeMethod(s);
             });
             Console.WriteLine("Выполнилось {0} итераций", foreach_result.LowestBreakIteration);
+            */
+
+
+
+
+
+            //Параллельное выполнение LinQ запроса
+            /*
+            var messages = Enumerable.Range(1, 1000).Select(i => $"Message {i:000}");//.ToArray();
+            var long_creating_messages = messages.
+                AsParallel().                               //Параллельное выполнение LinQ
+                //AsSequential().   //Последовательное выполнение запроса
+                WithDegreeOfParallelism(degreeOfParallelism: 3).    //Количество потоков
+                WithExecutionMode(ParallelExecutionMode.ForceParallelism).   //Система сама принимает решение о необходимости распараллеливать запрос                
+                Select(
+                m =>
+                {
+                    Console.WriteLine("Запрос сообщение {0}", m);
+                    Thread.Sleep(250);
+                    Console.WriteLine("Сообщение {0} сформировано", m);
+                    return m;
+                });
+
+            
+            var selected_messages = long_creating_messages.                
+                Select(m => (msg: m, length: m.Length)).
+                Where(m => m.msg.EndsWith("20")).
+                ToArray();
+            */
+
 
             Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
