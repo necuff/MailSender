@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSenderLib.Tests", "Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson5Console", "Lesson5Console\Lesson5Console.csproj", "{4FD3519D-1470-4A13-9B07-D98FDAB8735F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleLesson6", "Tests\TestConsoleLesson6\TestConsoleLesson6.csproj", "{C69EACA0-9475-4428-856A-D513BFB496EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleLesson6", "Tests\TestConsoleLesson6\TestConsoleLesson6.csproj", "{C69EACA0-9475-4428-856A-D513BFB496EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson6Console", "Tests\Lesson6Console\Lesson6Console.csproj", "{D66243E4-562B-4E77-9BF0-02E83C3B6446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{C69EACA0-9475-4428-856A-D513BFB496EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C69EACA0-9475-4428-856A-D513BFB496EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C69EACA0-9475-4428-856A-D513BFB496EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66243E4-562B-4E77-9BF0-02E83C3B6446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66243E4-562B-4E77-9BF0-02E83C3B6446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66243E4-562B-4E77-9BF0-02E83C3B6446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66243E4-562B-4E77-9BF0-02E83C3B6446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{6E8B15F4-8878-4ABA-987F-30833B4431F5} = {FA2E519D-F720-43DE-B58E-3C562099A5C0}
 		{4FD3519D-1470-4A13-9B07-D98FDAB8735F} = {FA2E519D-F720-43DE-B58E-3C562099A5C0}
 		{C69EACA0-9475-4428-856A-D513BFB496EA} = {FA2E519D-F720-43DE-B58E-3C562099A5C0}
+		{D66243E4-562B-4E77-9BF0-02E83C3B6446} = {FA2E519D-F720-43DE-B58E-3C562099A5C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94EDD5A7-155A-499B-9EB2-83FE1D319C1F}
