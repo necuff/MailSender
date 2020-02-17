@@ -26,30 +26,75 @@ namespace MailSender
     { 
         public WpfMailSender() => InitializeComponent();
 
-        private void OnStartButtonClick(object sender, RoutedEventArgs e)
+        private CancellationTokenSource _ProcessCancelation;
+
+        private async void OnStartButtonClick(object sender, RoutedEventArgs e)
         {
+            if (!(sender is Button button)) return;
+            button.IsEnabled = false;
+
+            var cancellation = new CancellationTokenSource();
+            _ProcessCancelation?.Cancel();            
+            _ProcessCancelation = cancellation;
+            
+            Result.Text = "Запуск операции";
             const string message = "KIjfkdsjf";
+            
+            IProgress<int> progress = new Progress<int>(p => _Progress.Value = p);
 
-            var result = GetMessageLenght(message);
+            try
+            {
+                var result = await GetMessageLenghtAsync(message, 30, progress, cancellation.Token);
 
-            Result.Text = result.ToString();
+                progress.Report(0);
+
+                Result.Text = result.ToString();
+            }
+
+            catch (OperationCanceledException ex)
+            {
+                Result.Text = "Отмена операции";
+                progress.Report(0);
+            }
+            button.IsEnabled = true;
+
         }
 
         private int _StartCount;
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)
         {
-
+            _ProcessCancelation.Cancel();
         }
 
-        private Task<int> GetMessageLenghtAsync(string Message, int Timeout = 30)
+        private Task<int> GetMessageLenghtAsync(string Message, int Timeout = 30, IProgress<int> Progress = null, CancellationToken Cancel = default)
         {
-            return Task.Run(() => GetMessageLenght(Message, Timeout));
+            return Task.Run(() => GetLenghtAsync(Message, Timeout, Progress, Cancel), Cancel);
         }
 
-        private int GetMessageLenght(string Message, int Timeout = 30)
+        private int GetMessageLenght(string Message, int Timeout = 30, IProgress<int> Progress = null, CancellationToken Cancel = default)
         {
             for (int i = 0; i < 100; i++)
+            {
                 Thread.Sleep(Timeout);
+                Progress?.Report(i);
+
+                Cancel.ThrowIfCancellationRequested();
+            }
+                
+            return Message.Length + _StartCount++;
+        }
+
+        private async Task<int> GetLenghtAsync(string Message, int Timeout = 30, IProgress<int> Progress = null, CancellationToken Cancel = default)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                await Task.Delay(Timeout, Cancel);
+
+                Progress?.Report(i);
+                
+                Cancel.ThrowIfCancellationRequested();
+            }
+
             return Message.Length + _StartCount++;
         }
     }
