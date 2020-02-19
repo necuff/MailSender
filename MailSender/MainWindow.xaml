@@ -6,15 +6,17 @@
         xmlns:fc="http://schemas.fontawesome.com/icons/"
         xmlns:vm="clr-namespace:WpfTest.ViewModels"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="600" Width="800">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+        Title="Tasks" Height="600" Width="800">
     <Grid>
         <StackPanel>
-            <TextBlock Text="{Binding Title}"></TextBlock>
-            <TextBox Text="{Binding Title}" HorizontalAlignment="Left" Width="300"></TextBox>
-            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="300"></TextBox>
+            <UniformGrid>
+                <Button Click="OnStartButtonClick">Запуск</Button>
+                <Button Click="OnCancelButtonClick">Остановка</Button>
+            </UniformGrid>
+            <ProgressBar Name="_Progress" Height="30"/>
+            <TextBlock>
+                Результат: <Run Name="Result">Отсутствует</Run>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Window>
